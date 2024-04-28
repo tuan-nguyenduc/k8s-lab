@@ -42,7 +42,7 @@ const TodoList = () => {
       <Typography variant="h6" gutterBottom sx={{ color: '#1976d2' }}>Todo List</Typography> {/* Typography color */}
       <List>
         
-        {todos.length == 0 ? <Typography>Your todo list is empty. Let add new one!</Typography> : todos.map(todo => (
+        {todos.length === 0 ? <Typography>Your todo list is empty. Let add new one!</Typography> : todos.map(todo => (
           <Box key={todo.id} sx={{ backgroundColor: '#bdbdbd', borderRadius: 4, marginBottom: 2, padding: 1 }}> {/* Changed background color, added borderRadius, margin and padding */}
             <TodoItem todo={todo} onToggle={handleToggleTodo} onDelete={handleDeleteTodo} />
           </Box>

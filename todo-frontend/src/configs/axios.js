@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/', // Update the baseURL with your backend API URL
+  baseURL: process.env.REACT_APP_BACKEND_URL, // Read base URL from environment variable
 });
 
 export default instance;

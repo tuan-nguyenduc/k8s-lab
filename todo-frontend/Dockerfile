@@ -1,4 +1,4 @@
-# Use a Node.js base image with Alpine Linux
+# Use a Node.js base image with a specific version
 FROM node:14-alpine
 
 # Create a new user and group with UID/GID 1000
@@ -22,8 +22,11 @@ USER nodeuser
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Expose the port your app runs on
+# Build the React application
+RUN npm run build
+
+# Expose port 3000
 EXPOSE 3000
 
-# Command to run your application
+# Command to run the production build of the React application
 CMD ["npm", "start"]

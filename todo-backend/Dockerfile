@@ -2,7 +2,7 @@
 FROM node:14-alpine
 
 # Create a new user and group with UID/GID 1000
-RUN addgroup -g 1000 nodeuser && adduser -u 1000 -G nodeuser -D nodeuser
+RUN addgroup -g 1001 nodeuser && adduser -u 1001 -G nodeuser -D nodeuser
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app

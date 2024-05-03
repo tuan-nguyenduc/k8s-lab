@@ -26,8 +26,8 @@ RUN chown -R nginxuser:nginxuser /var/cache/nginx /var/run /var/log/nginx /etc/n
 # Copy build files from the build stage
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-# Expose port 3000
-EXPOSE 3000
+# Expose port 80
+EXPOSE 80
 
 # Switch to the new user
 USER nginxuser

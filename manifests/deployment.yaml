@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-frontend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+      - name: todo-frontend
+        image: tuannd2211/todo-frontend:v1.0
+        ports:
+        - containerPort: 3001
+        envFrom:
+        - configMapRef:
+            name: todo-frontend-cm
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-backend-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      containers:
+      - name: todo-backend
+        image: tuannd2211/todo-backend:v1.0
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: todo-backend-secrets
+              key: DB_USER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: todo-backend-secrets
+              key: DB_PASSWORD
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: todo-backend-secrets
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: todo-backend-secrets
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: todo-backend-secrets
+              key: DB_NAME

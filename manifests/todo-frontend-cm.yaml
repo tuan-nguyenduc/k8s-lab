@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: todo-frontend-cm
+data:
+  REACT_APP_BACKEND_URL: "https://todo.tuannguyenduc.id.vn"
+  PORT: "3001"

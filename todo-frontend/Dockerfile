@@ -15,24 +15,22 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production Image
-FROM node:14-alpine AS run
-WORKDIR /usr/src/app
+FROM nginx:alpine
 
-# Create a new user and group with UID/GID 1000
-RUN addgroup -g 1001 nodeuser && adduser -u 1001 -G nodeuser -D nodeuser
+# Create a new user and group for running Nginx
+RUN addgroup -g 1001 nginxuser && adduser -D -H -u 1001 -G nginxuser nginxuser
 
-# Copy built files from the previous stage
-COPY --from=build /usr/src/app/build ./build
-COPY --from=build /usr/src/app/package*.json ./
+# Set ownership of Nginx directories to the new user
+RUN chown -R nginxuser:nginxuser /var/cache/nginx /var/run /var/log/nginx /etc/nginx/conf.d
 
-# Change ownership of the working directory to the newly created user
-RUN chown -R nodeuser:nodeuser /usr/src/app
+# Copy build files from the build stage
+COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-# Switch to the newly created user
-USER nodeuser
+# Expose port 80
+EXPOSE 80
 
-# Expose port 3000
-EXPOSE 3000
+# Switch to the new user
+USER nginxuser
 
-# Command to run the production build of the React application
-CMD ["npm", "start"]
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]

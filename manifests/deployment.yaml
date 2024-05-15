@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: todo-frontend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: todo-frontend
@@ -27,7 +27,7 @@ kind: Deployment
 metadata:
   name: todo-backend-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: todo-backend

@@ -10,4 +10,3 @@ spec:
   secretName: cert-secret
   dnsNames:
   - todo.tuannguyenduc.id.vn
-  - argo.tuannguyenduc.id.vn

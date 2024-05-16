@@ -11,6 +11,7 @@ spec:
   tls:
   - hosts:
     - todo.tuannguyenduc.id.vn
+    - argo.tuannguyenduc.id.vn
     secretName: cert-secret
   rules:
   - host: todo.tuannguyenduc.id.vn
